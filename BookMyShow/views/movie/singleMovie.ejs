@@ -1,0 +1,45 @@
+<%- include('../Layout/header') %>
+
+<section class="py-5 singleMovie">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5">
+                <div>
+                    <img src="<%= singleMovie.coverImage %>" alt="coverImage" title="coverImage"  width="100%" class="img-fluid rounded-4">
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <h1><%= singleMovie.title %></h1>
+                <div>
+                    <i i class="ri-star-fill"></i> <span><%= singleMovie.rating %>/10</span>
+                </div>
+                <div>
+                    <p class="bg-secondary px-2 d-inline-block"><%= singleMovie.movieType.join(', ') %></p>
+                </div>
+                <p class="bg-secondary px-2 d-inline-block"><%= singleMovie.language.join(', ') %></p>
+                <div class="d-flex align-items-center">
+                    <p class="m-0"><%= singleMovie.timeDuration %></p> <span class="mx-2 fs-4">·</span>
+                    <p class="m-0"><%= singleMovie.genre.join(', ') %></p> <span class="mx-2 fs-4">·</span>
+                    <p class="m-0"><%= singleMovie.criteria %></p> <span class="mx-2 fs-4">·</span>
+                    <p class="m-0"><%= singleMovie.realeseDate %></p> 
+                </div>
+                <p><%= singleMovie.description %></p>
+            </div>
+        </div>
+
+        <div class="comment-box mt-5">
+            <form method="post" action="/comment/insertComment">
+                <input type="hidden" name="id" value="<%= singleMovie.id %>">
+                <input type="text" name="movieComment" placeholder="Comment Here" class="form-control">
+                <button type="submit" class="btn text-white mt-3">comment</button>
+            </form>
+            <div class="my-2">
+                <% allComment.map((item)=>{ %>
+                    <p><%= item.movieComment %></p>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('../Layout/footer') %>
